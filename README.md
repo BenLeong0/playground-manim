@@ -6,4 +6,5 @@ experimenting with the `manim` animation library, found [here](https://www.manim
 
 ### Mergesort
 
-![](https://github.com/BenLeong0/playground-manim/raw/refs/heads/main/dist/Mergesort.mp4)
+https://github.com/user-attachments/assets/1f277522-25de-4762-98a4-440219c99b34
+
