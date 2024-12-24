@@ -74,13 +74,16 @@ class Sorting(Scene):
     def mergesort(self, l: int, r_: int):
         m = min((l + r_) // 2, len(self.word) - 1)
         r = min(r_, len(self))
-
+        if l > 0 or r < len(self):
+            self.play(
+                *(entry.animate.shift(LEFT * 0.1) for entry in self.entries[:l]),
+                *(entry.animate.shift(RIGHT * 0.1) for entry in self.entries[r:]),
+                run_time=0.2,
+            )
         self.play(
-            # *(entry.animate.shift(LEFT * 0.1) for entry in self.entries[:l]),
-            # *(entry.animate.shift(RIGHT * 0.1) for entry in self.entries[r:]),
             *(box.animate.set_fill(YELLOW_B, opacity=0.8) for box in self.boxes[l:m]),
             *(box.animate.set_fill(BLUE_B, opacity=0.8) for box in self.boxes[m:r]),
-            run_time=0.2,
+            run_time=0.4,
         )
 
         p1, p2 = l, m
@@ -88,7 +91,7 @@ class Sorting(Scene):
             if p1 > l:
                 self.play(
                     self.boxes[p1 - 1].animate.set_fill(GREY, opacity=0.0),
-                    run_time=0.2,
+                    run_time=0.4,
                 )
 
             if self.word_arr[p1] <= self.word_arr[p2]:
@@ -104,16 +107,12 @@ class Sorting(Scene):
                 p1 += 1
                 p2 += 1
         self.wait(0.2)
-        self.play(
-            *(box.animate.set_fill(GREY, opacity=0) for box in self.boxes[l:r]),
-            run_time=0.2,
-        )
 
         self.play(
-            # *(entry.animate.shift(RIGHT * 0.1) for entry in self.entries[:l]),
             *(box.animate.set_fill(WHITE, opacity=0) for box in self.boxes[l:r]),
-            # *(entry.animate.shift(LEFT * 0.1) for entry in self.entries[r:]),
-            run_time=0.2,
+            *(entry.animate.shift(RIGHT * 0.1) for entry in self.entries[:l]),
+            *(entry.animate.shift(LEFT * 0.1) for entry in self.entries[r:]),
+            run_time=0.4,
         )
 
     def binary_pairings(self, length: int):
