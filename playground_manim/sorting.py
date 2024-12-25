@@ -38,36 +38,11 @@ class Sorting(Scene):
         self.play(ReplacementTransform(intro_text, VGroup(*self.letters)))
         self.play(*(Create(letter_box) for letter_box in self.boxes))
 
-        # self.play(Group(*self.entries).animate.shift(UP * 2))
-
         for l, r in self.binary_pairings(len(self.word)):
             self.mergesort(l, r)
 
         for box in self.boxes:
-            self.play(
-                box.animate.set_fill(BLUE, opacity=0.5),
-                run_time=0.05,
-            )
-        # for i in range(len(self.boxes) + 1):
-        #     if i > 0:
-        #         self.play(
-        #             self.boxes[i - 1].animate.set_fill(BLUE, opacity=0.0),
-        #             run_time=0.05,
-        #         )
-        #     if i < len(self) - 1:
-        #         self.play(
-        #             self.boxes[i + 1].animate.set_fill(BLUE, opacity=0.5),
-        #             run_time=0.05,
-        #         )
-
-        self.wait(1)
-
-        # self.mergesort()
-        # selected = [0, 1]
-        # self.play(
-        #     *(letter_boxes[i].animate.set_color(YELLOW) for i in selected), run_time=0.5
-        # )
-        # self.play(Swap(letters[0], letters[1]))
+            self.play(box.animate.set_fill(BLUE, opacity=0.5), run_time=0.05)
 
         self.wait(1)
 
